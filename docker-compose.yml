@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+
+  mysql-customer:
+    image: mysql:8.0
+    container_name: mysql-customer
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: customer_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_customer_data:/var/lib/mysql
+    networks:
+      - order-system-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  mysql-order:
+    image: mysql:8.0
+    container_name: mysql-order
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: order_db
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_order_data:/var/lib/mysql
+    networks:
+      - order-system-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  customer-service:
+    build:
+      context: customer-service
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: target/customer-service-1.0.0.jar
+    container_name: customer-service
+    image: imepac/customer-service:1.0.0
+    ports:
+      - "8081:8081"
+    environment:
+      DB_HOST: mysql-customer
+      DB_PORT: 3306
+      DB_NAME: customer_db
+      DB_USER: root
+      DB_PASSWORD: root
+    networks:
+      - order-system-network
+    depends_on:
+      mysql-customer:
+        condition: service_healthy
+    restart: on-failure
+
+  order-service:
+    build:
+      context: order-service
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: target/order-service-1.0.0.jar
+    container_name: order-service
+    image: imepac/order-service:1.0.0
+    ports:
+      - "8082:8082"
+    environment:
+      DB_HOST: mysql-order
+      DB_PORT: 3306
+      DB_NAME: order_db
+      DB_USER: root
+      DB_PASSWORD: root
+      CUSTOMER_SERVICE_URL: http://customer-service:8081
+    networks:
+      - order-system-network
+    depends_on:
+      mysql-order:
+        condition: service_healthy
+      customer-service:
+        condition: service_started
+    restart: on-failure
+
+networks:
+  order-system-network:
+    driver: bridge
+
+volumes:
+  mysql_customer_data:
+  mysql_order_data:
