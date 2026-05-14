@@ -6,4 +6,3 @@ public enum AppointmentStatus {
     RETURN_SCHEDULED,
     RETURN_CANCELLED
 }
-
