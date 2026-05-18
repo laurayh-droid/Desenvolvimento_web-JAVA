@@ -1,6 +1,6 @@
 package com.imepac.appointment.service;
 
-import com.imepac.appointment.dto.*;
+import com.imepac.commons.dto.*;
 
 import java.time.LocalDateTime;
 import java.util.List;

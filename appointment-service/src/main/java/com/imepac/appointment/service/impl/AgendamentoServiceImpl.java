@@ -1,12 +1,12 @@
 package com.imepac.appointment.service.impl;
 
 import com.imepac.appointment.converter.AgendamentoConversor;
-import com.imepac.appointment.dto.*;
-import com.imepac.appointment.entity.Agendamento;
-import com.imepac.appointment.entity.Paciente;
-import com.imepac.appointment.enums.StatusAgendamento;
-import com.imepac.appointment.exception.AgendamentoNaoEncontradoException;
-import com.imepac.appointment.exception.PacienteNaoEncontradoException;
+import com.imepac.commons.dto.*;
+import com.imepac.commons.entity.Agendamento;
+import com.imepac.commons.entity.Paciente;
+import com.imepac.commons.enums.StatusAgendamento;
+import com.imepac.commons.exception.AgendamentoNaoEncontradoException;
+import com.imepac.commons.exception.PacienteNaoEncontradoException;
 import com.imepac.appointment.repository.AgendamentoRepository;
 import com.imepac.appointment.repository.PacienteRepository;
 import com.imepac.appointment.service.AgendamentoService;

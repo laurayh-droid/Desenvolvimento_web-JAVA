@@ -1,9 +1,9 @@
 package com.imepac.appointment.converter;
 
-import com.imepac.appointment.dto.*;
-import com.imepac.appointment.entity.Agendamento;
-import com.imepac.appointment.entity.Paciente;
-import com.imepac.appointment.enums.StatusAgendamento;
+import com.imepac.commons.dto.*;
+import com.imepac.commons.entity.Agendamento;
+import com.imepac.commons.entity.Paciente;
+import com.imepac.commons.enums.StatusAgendamento;
 
 import java.time.LocalDateTime;
 

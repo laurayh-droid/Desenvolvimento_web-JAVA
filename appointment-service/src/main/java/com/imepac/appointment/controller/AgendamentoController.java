@@ -1,6 +1,6 @@
 package com.imepac.appointment.controller;
 
-import com.imepac.appointment.dto.*;
+import com.imepac.commons.dto.*;
 
 import com.imepac.appointment.service.AgendamentoService;
 

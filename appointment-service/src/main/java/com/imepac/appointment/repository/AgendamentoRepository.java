@@ -1,7 +1,7 @@
 package com.imepac.appointment.repository;
 
-import com.imepac.appointment.entity.Agendamento;
-import com.imepac.appointment.enums.StatusAgendamento;
+import com.imepac.commons.entity.Agendamento;
+import com.imepac.commons.enums.StatusAgendamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
