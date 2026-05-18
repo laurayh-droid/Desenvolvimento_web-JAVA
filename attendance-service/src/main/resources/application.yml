@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: attendance-service
+
+  datasource:
+    # Mantido para compatibilidade com o padrão do projeto (MySQL pode falhar localmente).
+    url: jdbc:mysql://localhost:3306/imepac_order_system?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+server:
+  port: 8081
+
