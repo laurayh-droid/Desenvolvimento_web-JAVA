@@ -57,6 +57,8 @@ Nas Tabelas 17.1 a 17.3 estão listados os Módulos Administrativo, Agendamento 
 **Exames**:                             Permite o registro de exames solicitados 
 pelo médico.
 
+** O módulo Atendimento deve gravar os dados: (1) em uma única tabela por atendimento (aggregate)
+
 
 
 ### 17.2 Módulo Administrativo
