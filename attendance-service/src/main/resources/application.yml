@@ -1,43 +1,30 @@
-# server:
-#   port: 8081
+server:
+  port: 8085
 
-# spring:
-#   application:
-#     name: attendance-service
-#   datasource:
-#     url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:attendance_db}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-#     username: ${DB_USER:root}
-#     password: ${DB_PASSWORD:root}
-#     driver-class-name: com.mysql.cj.jdbc.Driver
-#   jpa:
-#     hibernate:
-#       ddl-auto: update
-#     show-sql: false
-#     properties:
-#       hibernate:
-#         dialect: org.hibernate.dialect.MySQLDialect
-#         format_sql: true
+spring:
+  application:
+    name: attendance-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/attendance_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
 
-# springdoc:
-#   api-docs:
-#     path: /api-docs
-#   swagger-ui:
-#     path: /swagger-ui.html
-#     operationsSorter: method
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
 
-# logbook:
-#   filter:
-#     enabled: true
-#   format:
-#     style: http
-#   include:
-#     - /api/v1/**
-#   obfuscate:
-#     headers:
-#       - Authorization
-
-# logging:
-#   level:
-#     com.imepac: DEBUG
-#     org.zalando.logbook: TRACE
-
+logging:
+  level:
+    com.imepac: DEBUG
