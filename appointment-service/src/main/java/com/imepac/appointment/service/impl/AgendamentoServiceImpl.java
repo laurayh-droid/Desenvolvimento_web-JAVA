@@ -40,6 +40,8 @@ public class AgendamentoServiceImpl implements AgendamentoService {
             throw new BusinessException("Paciente já cadastrado com o RG: " + request.getRg());
         }
 
+        validateSeguro(request);
+
         Paciente paciente = AgendamentoConversor.toEntity(request);
         Paciente salvo = pacienteRepository.save(paciente);
         return AgendamentoConversor.toResponse(salvo);
@@ -49,6 +51,12 @@ public class AgendamentoServiceImpl implements AgendamentoService {
     @Transactional(readOnly = true)
     public List<RespostaPaciente> listarPacientes() {
         return pacienteRepository.findAll().stream().map(AgendamentoConversor::toResponse).toList();
+    }
+
+    private void validateSeguro(CriarPacienteRequest request) {
+        if (Boolean.TRUE.equals(request.getPossuiSeguro()) && (request.getNomeEmpresaSeguro() == null || request.getNomeEmpresaSeguro().isBlank())) {
+            throw new BusinessException("Nome da empresa do seguro é obrigatório quando o paciente possui convênio/plano de saúde");
+        }
     }
 
     @Override
