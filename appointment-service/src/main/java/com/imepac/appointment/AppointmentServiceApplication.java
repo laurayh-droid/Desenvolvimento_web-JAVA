@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import static java.lang.annotation.ElementType.*;
+// import static java.lang.annotation.ElementType.*;
 
 @SpringBootApplication(scanBasePackages = "com.imepac")
 @EntityScan(basePackages = "com.imepac.commons.entity")
