@@ -2,8 +2,6 @@ version: '3.8'
 
 services:
 
-
-
   mysql-appointment:
     image: mysql:8.0
     container_name: mysql-appointment
@@ -46,11 +44,98 @@ services:
         condition: service_healthy
     restart: on-failure
 
+  mysql-administrative:
+    image: mysql:8.0
+    container_name: mysql-administrative
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: administrative_db
+    ports:
+      - "3310:3306"
+    volumes:
+      - mysql_administrative_data:/var/lib/mysql
+    networks:
+      - order-system-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  administrative-service:
+    build:
+      context: administrative-service
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: target/administrative-service-1.0.0.jar
+    container_name: administrative-service
+    image: imepac/administrative-service:1.0.0
+    ports:
+      - "8084:8084"
+    environment:
+      DB_HOST: mysql-administrative
+      DB_PORT: 3306
+      DB_NAME: administrative_db
+      DB_USER: root
+      DB_PASSWORD: root
+    networks:
+      - order-system-network
+    depends_on:
+      mysql-administrative:
+        condition: service_healthy
+    restart: on-failure
+
+  mysql-attendance:
+    image: mysql:8.0
+    container_name: mysql-attendance
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: attendance_db
+    ports:
+      - "3311:3306"
+    volumes:
+      - mysql_attendance_data:/var/lib/mysql
+    networks:
+      - order-system-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  attendance-service:
+    build:
+      context: attendance-service
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: target/attendance-service-1.0.0.jar
+    container_name: attendance-service
+    image: imepac/attendance-service:1.0.0
+    ports:
+      - "8085:8085"
+    environment:
+      DB_HOST: mysql-attendance
+      DB_PORT: 3306
+      DB_NAME: attendance_db
+      DB_USER: root
+      DB_PASSWORD: root
+    networks:
+      - order-system-network
+    depends_on:
+      mysql-attendance:
+        condition: service_healthy
+    restart: on-failure
+
 networks:
   order-system-network:
     driver: bridge
 
 volumes:
   mysql_appointment_data:
+  mysql_administrative_data:
+  mysql_attendance_data:
+
 
 

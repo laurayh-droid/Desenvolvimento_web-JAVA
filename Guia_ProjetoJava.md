@@ -67,21 +67,21 @@ Por ser o módulo que permite a administração do banco de dados do aplicativo,
 
 Conforme visto anteriormente, este módulo será utilizado para que possamos cadastrar funcionários, usuários, especialidades, médicos e convênios. Todos esses cadastros devem permitir a inclusão de novos registros, ex-clusão de registros existentes, alteração de dados de registros e consülta/visualização.
 
-Para o cadastro de funcionários serão necessários os seguintes dados: nome completo, número do RG, número do CPF, endereço completo (rua, número, complemento, bairro, cidade, estado e CEP), telefones (fixo e celu-lar), número da CTPS, número do PIS.
+Para o cadastro de funcionários serão necessários os seguintes dados: nome completo, número do RG, número do CPF, endereço completo (rua, número, complemento, bairro, cidade, estado e CEP), telefones (fixo e celular), número da CTPS, número do PIS.
 
-O cadastro de usuário é efetuado a partir do cadastro de funcionários. Sendo assim, é necessário que o funcio-nário já esteja devidamente cadastrado. A tela deve permitir a seleção do funcionário por meio de uma caixa de combinação. Os dados de identificação do usuário (iduser) e senha de acesso (password) serão informados, assim como as permissões de acesso ao sistema. O cadastro de especialidades é bastante simples, e a única informação a ser digitada é a descrição.
+O cadastro de usuário é efetuado a partir do cadastro de funcionários. Sendo assim, é necessário que o funcionário já esteja devidamente cadastrado. A tela deve permitir a seleção do funcionário por meio de uma caixa de combinação. Os dados de identificação do usuário (iduser) e senha de acesso (password) serão informados, assim como as permissões de acesso ao sistema. O cadastro de especialidades é bastante simples, e a única informação a ser digitada é a descrição.
 
 A seguir temos o cadastro de médicos, que deve conter nome do médico, número do CRM e especialidade.Por fim, o cadastro de convênios, que terá apenas o nome da empresa, CNPJ e telefone.
 
 
 ### 17.3 Módulo Agendamento
 
-Este talvez seja o módulo mais complexo, pois permite a execução de várias tarefas. Em primeiro lugar, temos o cadastro de pacientes, que deve conter, como dados, o nome completo, número do RG, número do CPF, ende-reço completo (rua, número, complemento, cidade, estado e CEP), telefones (fixo e celular), data de nascimen-to, sexo, se possui convênio/plano de saúde e de qual empresa.
+Este talvez seja o módulo mais complexo, pois permite a execução de várias tarefas. Em primeiro lugar, temos o cadastro de pacientes, que deve conter, como dados, o nome completo, número do RG, número do CPF, endereço completo (rua, número, complemento, cidade, estado e CEP), telefones (fixo e celular), data de nascimen-to, sexo, se possui convênio/plano de saúde e de qual empresa.
 
-A agenda de consulta deve permitir ao atendente pesquisar o día e o horário que estão disponíveis para o pa-ciente. Quando houver necessidade de retorno do paciente, procedimento similar deverá ser executado.
+A agenda de consulta deve permitir ao atendente pesquisar o día e o horário que estão disponíveis para o paciente. Quando houver necessidade de retorno do paciente, procedimento similar deverá ser executado.
 
 
-A opção de cancelamento de consulta, quando solicitado pelo paciente, deve liberar no calendário de consul-tas o dia e hora alocados anteriormente. Para efetivação do cancelamento, o sistema deve solicitar o motivo e uma senha.
+A opção de cancelamento de consulta, quando solicitado pelo paciente, deve liberar no calendário de consultas o dia e hora alocados anteriormente. Para efetivação do cancelamento, o sistema deve solicitar o motivo e uma senha.
 
 
 ### 17.4 Módulo Atendimento

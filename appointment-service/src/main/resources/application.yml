@@ -5,7 +5,7 @@ spring:
   application:
     name: appointment-service
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:appointment_db}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: "jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:appointment_db}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
     username: ${DB_USER:root}
     password: ${DB_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -25,19 +25,6 @@ springdoc:
     path: /swagger-ui.html
     operationsSorter: method
 
-logbook:
-  filter:
-    enabled: true
-  format:
-    style: http
-  include:
-    - /api/v1/**
-  obfuscate:
-    headers:
-      - Authorization
-
 logging:
   level:
     com.imepac: DEBUG
-    org.zalando.logbook: TRACE
-
