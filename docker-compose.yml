@@ -1,10 +1,11 @@
-version: '3.8'
+
 
 services:
 
   mysql-appointment:
     image: mysql:8.0
-    container_name: mysql-appointment
+    restart: unless-stopped
+    command: ["mysqld", "--default-authentication-plugin=mysql_native_password"]
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: appointment_db
@@ -18,8 +19,8 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
       timeout: 5s
-      retries: 5
-      start_period: 30s
+      retries: 10
+      start_period: 60s
 
   appointment-service:
     build:
@@ -46,7 +47,8 @@ services:
 
   mysql-administrative:
     image: mysql:8.0
-    container_name: mysql-administrative
+    restart: unless-stopped
+    command: ["mysqld", "--default-authentication-plugin=mysql_native_password"]
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: administrative_db
@@ -60,8 +62,8 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
       timeout: 5s
-      retries: 5
-      start_period: 30s
+      retries: 10
+      start_period: 60s
 
   administrative-service:
     build:
@@ -88,7 +90,8 @@ services:
 
   mysql-attendance:
     image: mysql:8.0
-    container_name: mysql-attendance
+    restart: unless-stopped
+    command: ["mysqld", "--default-authentication-plugin=mysql_native_password"]
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: attendance_db
@@ -102,8 +105,8 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
       timeout: 5s
-      retries: 5
-      start_period: 30s
+      retries: 10
+      start_period: 60s
 
   attendance-service:
     build:
