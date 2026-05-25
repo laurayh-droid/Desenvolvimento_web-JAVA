@@ -18,6 +18,8 @@ public class AtualizarUsuarioRequest {
 
     private Long funcionarioId;
 
+    private Long perfilId;
+
     @Size(min = 1)
     private Set<@Size(max = 100) String> permissoes;
 }

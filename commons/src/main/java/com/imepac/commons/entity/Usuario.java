@@ -28,6 +28,10 @@ public class Usuario {
     @Column(name = "funcionario_id", nullable = false)
     private Long funcionarioId;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "perfil_id", nullable = false)
+    private Perfil perfil;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "usuario_permissoes", joinColumns = @JoinColumn(name = "usuario_id"))
     @Column(name = "permissao", length = 100)

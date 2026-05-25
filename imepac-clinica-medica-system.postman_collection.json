@@ -1,0 +1,1111 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "Imepac - Order System Atualizado",
+    "description": "Coleção de endpoints atualizada para appointment-service, attendance-service e administrative-service.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "appointment_base_url",
+      "value": "http://localhost:8083",
+      "type": "string"
+    },
+    {
+      "key": "attendance_base_url",
+      "value": "http://localhost:8085",
+      "type": "string"
+    },
+    {
+      "key": "administrative_base_url",
+      "value": "http://localhost:8084",
+      "type": "string"
+    },
+    {
+      "key": "patient_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "appointment_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "attendance_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "funcionario_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "usuario_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "especialidade_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "medico_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "convenio_id",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Appointment Service",
+      "description": "Endpoints do appointment-service rodando na porta 8083",
+      "item": [
+        {
+          "name": "Cadastrar Paciente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  if (body.data && body.data.id) {",
+                  "    pm.collectionVariables.set('patient_id', body.data.id);",
+                  "    console.log('patient_id salvo: ' + body.data.id);",
+                  "  }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nomeCompleto\": \"João Silva\",\n  \"rg\": \"123456789\",\n  \"cpf\": \"123.456.789-00\",\n  \"dataNascimento\": \"1990-05-20T10:30:00\",\n  \"genero\": \"MALE\",\n  \"telefoneFixo\": \"(11) 3232-3232\",\n  \"telefoneCelular\": \"(11) 99999-8888\",\n  \"possuiSeguro\": false,\n  \"nomeEmpresaSeguro\": \"\",\n  \"rua\": \"Rua das Flores\",\n  \"numero\": \"123\",\n  \"complemento\": \"Apto 12\",\n  \"bairro\": \"Centro\",\n  \"cidade\": \"São Paulo\",\n  \"estado\": \"SP\",\n  \"cep\": \"01234-567\"\n}"
+            },
+            "url": {
+              "raw": "{{appointment_base_url}}/api/v1/pacientes",
+              "host": [
+                "{{appointment_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pacientes"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Pacientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{appointment_base_url}}/api/v1/pacientes",
+              "host": [
+                "{{appointment_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pacientes"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar Paciente por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{appointment_base_url}}/api/v1/pacientes/{{patient_id}}",
+              "host": [
+                "{{appointment_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pacientes",
+                "{{patient_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Paciente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"telefoneCelular\": \"(11) 98888-7777\",\n  \"cidade\": \"Campinas\",\n  \"estado\": \"SP\"\n}"
+            },
+            "url": {
+              "raw": "{{appointment_base_url}}/api/v1/pacientes/{{patient_id}}",
+              "host": [
+                "{{appointment_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pacientes",
+                "{{patient_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Agendar Consulta",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  if (body.data && body.data.id) {",
+                  "    pm.collectionVariables.set('appointment_id', body.data.id);",
+                  "    console.log('appointment_id salvo: ' + body.data.id);",
+                  "  }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pacienteId\": {{patient_id}},\n  \"medicoId\": {{medico_id}},\n  \"agendadoEm\": \"2026-06-20T09:30:00\",\n  \"prontuario\": \"Consulta inicial de rotina\"\n}"
+            },
+            "url": {
+              "raw": "{{appointment_base_url}}/api/v1/consultas",
+              "host": [
+                "{{appointment_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "consultas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Consultas por Paciente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{appointment_base_url}}/api/v1/consultas/paciente/{{patient_id}}",
+              "host": [
+                "{{appointment_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "consultas",
+                "paciente",
+                "{{patient_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Encontrar Disponibilidade do Médico",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{appointment_base_url}}/api/v1/consultas/medico/disponibilidade?medicoId={{medico_id}}&inicio=2026-06-20T08:00:00&fim=2026-06-20T18:00:00",
+              "host": [
+                "{{appointment_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "consultas",
+                "medico",
+                "disponibilidade"
+              ],
+              "query": [
+                {
+                  "key": "medicoId",
+                  "value": "{{medico_id}}"
+                },
+                {
+                  "key": "inicio",
+                  "value": "2026-06-20T08:00:00"
+                },
+                {
+                  "key": "fim",
+                  "value": "2026-06-20T18:00:00"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cancelar Consulta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"motivo\": \"Paciente não poderá comparecer\",\n  \"senha\": \"senha123\"\n}"
+            },
+            "url": {
+              "raw": "{{appointment_base_url}}/api/v1/consultas/{{appointment_id}}/cancelar",
+              "host": [
+                "{{appointment_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "consultas",
+                "{{appointment_id}}",
+                "cancelar"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Agendar Retorno",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agendadoRetornoEm\": \"2026-07-01T14:00:00\",\n  \"prontuario\": \"Retorno para avaliação de evolução\"\n}"
+            },
+            "url": {
+              "raw": "{{appointment_base_url}}/api/v1/consultas/{{appointment_id}}/retorno",
+              "host": [
+                "{{appointment_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "consultas",
+                "{{appointment_id}}",
+                "retorno"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Registrar Prontuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/plain"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "Paciente com evolução satisfatória, recomenda-se continuar medicação por mais 7 dias."
+            },
+            "url": {
+              "raw": "{{appointment_base_url}}/api/v1/consultas/{{appointment_id}}/prontuario",
+              "host": [
+                "{{appointment_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "consultas",
+                "{{appointment_id}}",
+                "prontuario"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance Service",
+      "description": "Endpoints do attendance-service rodando na porta 8085",
+      "item": [
+        {
+          "name": "Registrar Atendimento",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agendamentoId\": {{appointment_id}},\n  \"pacienteId\": {{patient_id}},\n  \"medicoId\": {{medico_id}},\n  \"diagnostico\": \"Cefaleia tensional\",\n  \"observacoes\": \"Recomendar repouso e hidratação\",\n  \"prontuario\": \"Paciente relatou dor de cabeça ocasional\",\n  \"receituario\": \"Dipirona 500mg, 1 comprimido a cada 8 horas\",\n  \"examesSolicitados\": \"Hemograma completo\"\n}"
+            },
+            "url": {
+              "raw": "{{attendance_base_url}}/api/v1/atendimentos",
+              "host": [
+                "{{attendance_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "atendimentos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Atendimentos por Paciente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{attendance_base_url}}/api/v1/atendimentos/paciente/{{patient_id}}",
+              "host": [
+                "{{attendance_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "atendimentos",
+                "paciente",
+                "{{patient_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar Atendimento por Agendamento",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{attendance_base_url}}/api/v1/atendimentos/agendamento/{{appointment_id}}",
+              "host": [
+                "{{attendance_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "atendimentos",
+                "agendamento",
+                "{{appointment_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Administrative Service",
+      "description": "Endpoints do administrative-service rodando na porta 8084",
+      "item": [
+        {
+          "name": "Cadastrar Especialidade",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  if (body.data && body.data.id) {",
+                  "    pm.collectionVariables.set('especialidade_id', body.data.id);",
+                  "    console.log('especialidade_id salvo: ' + body.data.id);",
+                  "  }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"descricao\": \"Cardiologia\"\n}"
+            },
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/especialidades",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "especialidades"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Especialidades",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/especialidades",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "especialidades"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar Especialidade por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/especialidades/{{especialidade_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "especialidades",
+                "{{especialidade_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Especialidade",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"descricao\": \"Neurologia\"\n}"
+            },
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/especialidades/{{especialidade_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "especialidades",
+                "{{especialidade_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir Especialidade",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/especialidades/{{especialidade_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "especialidades",
+                "{{especialidade_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cadastrar Médico",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  if (body.data && body.data.id) {",
+                  "    pm.collectionVariables.set('medico_id', body.data.id);",
+                  "    console.log('medico_id salvo: ' + body.data.id);",
+                  "  }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Dr. Pedro Souza\",\n  \"crm\": \"CRM123456\",\n  \"especialidadeId\": {{especialidade_id}}\n}"
+            },
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/medicos",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "medicos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Médicos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/medicos",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "medicos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar Médico por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/medicos/{{medico_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "medicos",
+                "{{medico_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Médico",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Dra. Ana Costa\",\n  \"crm\": \"CRM987654\",\n  \"especialidadeId\": {{especialidade_id}}\n}"
+            },
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/medicos/{{medico_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "medicos",
+                "{{medico_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir Médico",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/medicos/{{medico_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "medicos",
+                "{{medico_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cadastrar Convênio",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  if (body.data && body.data.id) {",
+                  "    pm.collectionVariables.set('convenio_id', body.data.id);",
+                  "    console.log('convenio_id salvo: ' + body.data.id);",
+                  "  }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nomeEmpresa\": \"Clínica São Lucas\",\n  \"cnpj\": \"12.345.678/0001-90\",\n  \"telefone\": \"(11) 4002-8922\"\n}"
+            },
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/convenios",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "convenios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Convênios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/convenios",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "convenios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar Convênio por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/convenios/{{convenio_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "convenios",
+                "{{convenio_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Convênio",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nomeEmpresa\": \"Clínica São Lucas Atualizada\",\n  \"cnpj\": \"12.345.678/0001-90\",\n  \"telefone\": \"(11) 4002-0000\"\n}"
+            },
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/convenios/{{convenio_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "convenios",
+                "{{convenio_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir Convênio",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/convenios/{{convenio_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "convenios",
+                "{{convenio_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cadastrar Funcionário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  if (body.data && body.data.id) {",
+                  "    pm.collectionVariables.set('funcionario_id', body.data.id);",
+                  "    console.log('funcionario_id salvo: ' + body.data.id);",
+                  "  }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nomeCompleto\": \"Ana Pereira\",\n  \"rg\": \"987654321\",\n  \"cpf\": \"987.654.321-00\",\n  \"dataNascimento\": \"1985-12-10T09:00:00\",\n  \"telefoneFixo\": \"(11) 3333-2222\",\n  \"telefoneCelular\": \"(11) 98888-7777\",\n  \"rua\": \"Rua Nova\",\n  \"numero\": \"45\",\n  \"complemento\": \"Sala 2\",\n  \"bairro\": \"Vila Nova\",\n  \"cidade\": \"São Paulo\",\n  \"estado\": \"SP\",\n  \"cep\": \"04567-890\",\n  \"numeroCtps\": \"123456\",\n  \"numeroPis\": \"98765432100\"\n}"
+            },
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/funcionarios",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "funcionarios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Funcionários",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/funcionarios",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "funcionarios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar Funcionário por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/funcionarios/{{funcionario_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "funcionarios",
+                "{{funcionario_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Funcionário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"telefoneCelular\": \"(11) 99999-1111\",\n  \"cidade\": \"Campinas\"\n}"
+            },
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/funcionarios/{{funcionario_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "funcionarios",
+                "{{funcionario_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir Funcionário",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/funcionarios/{{funcionario_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "funcionarios",
+                "{{funcionario_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cadastrar Usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  if (body.data && body.data.id) {",
+                  "    pm.collectionVariables.set('usuario_id', body.data.id);",
+                  "    console.log('usuario_id salvo: ' + body.data.id);",
+                  "  }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idUser\": \"ana.pereira\",\n  \"senha\": \"SenhaForte123!\",\n  \"funcionarioId\": {{funcionario_id}},\n  \"permissoes\": [\"ADMIN\", \"USER\"]\n}"
+            },
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/usuarios",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "usuarios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Usuários",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/usuarios",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "usuarios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar Usuário por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/usuarios/{{usuario_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "usuarios",
+                "{{usuario_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Usuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"senha\": \"NovaSenha123!\",\n  \"permissoes\": [\"USER\"]\n}"
+            },
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/usuarios/{{usuario_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "usuarios",
+                "{{usuario_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir Usuário",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{administrative_base_url}}/api/v1/admin/usuarios/{{usuario_id}}",
+              "host": [
+                "{{administrative_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "usuarios",
+                "{{usuario_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

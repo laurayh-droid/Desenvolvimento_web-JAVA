@@ -24,6 +24,9 @@ public class CriarUsuarioRequest {
     private Long funcionarioId;
 
     @NotNull
+    private Long perfilId;
+
+    @NotNull
     @Size(min = 1)
     private Set<@Size(max = 100) String> permissoes;
 }

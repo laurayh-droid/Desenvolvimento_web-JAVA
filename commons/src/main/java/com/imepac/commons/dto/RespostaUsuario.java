@@ -13,6 +13,8 @@ public class RespostaUsuario {
     private Long id;
     private String idUser;
     private Long funcionarioId;
+    private Long perfilId;
+    private String perfilNome;
     private Set<String> permissoes;
     private LocalDateTime criadoEm;
     private LocalDateTime atualizadoEm;

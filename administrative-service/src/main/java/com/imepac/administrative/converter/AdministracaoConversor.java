@@ -74,6 +74,7 @@ public final class AdministracaoConversor {
                 .idUser(request.getIdUser())
                 .senha(request.getSenha())
                 .funcionarioId(request.getFuncionarioId())
+                .perfil(Perfil.builder().id(request.getPerfilId()).build())
                 .permissoes(request.getPermissoes())
                 .build();
     }
@@ -83,6 +84,8 @@ public final class AdministracaoConversor {
                 .id(usuario.getId())
                 .idUser(usuario.getIdUser())
                 .funcionarioId(usuario.getFuncionarioId())
+                .perfilId(usuario.getPerfil() != null ? usuario.getPerfil().getId() : null)
+                .perfilNome(usuario.getPerfil() != null ? usuario.getPerfil().getNome() : null)
                 .permissoes(usuario.getPermissoes())
                 .criadoEm(usuario.getCriadoEm())
                 .atualizadoEm(usuario.getAtualizadoEm())
@@ -93,6 +96,7 @@ public final class AdministracaoConversor {
         if (request.getIdUser() != null) usuario.setIdUser(request.getIdUser());
         if (request.getSenha() != null) usuario.setSenha(request.getSenha());
         if (request.getFuncionarioId() != null) usuario.setFuncionarioId(request.getFuncionarioId());
+        if (request.getPerfilId() != null) usuario.setPerfil(Perfil.builder().id(request.getPerfilId()).build());
         if (request.getPermissoes() != null) usuario.setPermissoes(request.getPermissoes());
     }
 
