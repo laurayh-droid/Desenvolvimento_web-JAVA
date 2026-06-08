@@ -1,4 +1,4 @@
-﻿# Order System — Microsserviços com Spring Boot
+﻿# Clínica Médica — Microsserviços com Spring Boot
 
 > Projeto modular de microsserviços para agendamento, atendimento e administração médica.
 
