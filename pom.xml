@@ -15,6 +15,7 @@
         <module>administrative-service</module>
         <module>appointment-service</module>
         <module>attendance-service</module>
+        <module>gateway-service</module>
     </modules>
 
 

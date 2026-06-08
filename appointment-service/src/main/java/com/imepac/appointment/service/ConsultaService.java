@@ -1,20 +1,14 @@
 package com.imepac.appointment.service;
 
-import com.imepac.commons.dto.*;
+import com.imepac.commons.dto.AgendarRetornoRequest;
+import com.imepac.commons.dto.CancelarAgendamentoRequest;
+import com.imepac.commons.dto.CriarAgendamentoRequest;
+import com.imepac.commons.dto.RespostaAgendamento;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-
-public interface AgendamentoService {
-
-    RespostaPaciente cadastrarPaciente(CriarPacienteRequest request);
-
-    List<RespostaPaciente> listarPacientes();
-
-    RespostaPaciente buscarPacientePorId(Long id);
-
-    RespostaPaciente atualizarPaciente(Long id, AtualizarPacienteRequest request);
+public interface ConsultaService {
 
     RespostaAgendamento agendarConsulta(CriarAgendamentoRequest request);
 
@@ -28,4 +22,3 @@ public interface AgendamentoService {
 
     RespostaAgendamento registrarProntuario(Long agendamentoId, String prontuario);
 }
-

@@ -18,17 +18,17 @@ CREATE TABLE IF NOT EXISTS atendimentos (
 
 INSERT INTO atendimentos (agendamento_id, paciente_id, medico_id, registrado_em, diagnostico, observacoes, prontuario, receituario, exames_solicitados, criado_em) VALUES
 (6, 6, 5, '2026-05-15 14:30:00',
- 'Dermatite atÃ³pica moderada',
- 'Paciente apresenta lesÃµes eritematosas em membros superiores. Relata piora nos Ãºltimos 15 dias.',
- 'Paciente Lucas Oliveira, 30 anos. HistÃ³rico de alergia a nÃ­quel. Primeira consulta em 10/04/2026 com diagnÃ³stico de dermatite leve.',
- 'Hidrocortisona 1% creme - aplicar 2x ao dia por 14 dias. Loratadina 10mg - 1 comprimido Ã  noite por 10 dias.',
- 'Hemograma completo. IgE total sÃ©rica.',
+ 'Dermatite atópica moderada',
+ 'Paciente apresenta lesões eritematosas em membros superiores. Relata piora nos últimos 15 dias.',
+ 'Paciente Lucas Oliveira, 30 anos. Histórico de alergia a níquel. Primeira consulta em 10/04/2026 com diagnóstico de dermatite leve.',
+ 'Hidrocortisona 1% creme - aplicar 2x ao dia por 14 dias. Loratadina 10mg - 1 comprimido à noite por 10 dias.',
+ 'Hemograma completo. IgE total sérica.',
  NOW()),
 (7, 7, 6, '2026-05-10 11:30:00',
- 'Consulta ginecolÃ³gica de rotina',
+ 'Consulta ginecológica de rotina',
  'Paciente sem queixas. Exames preventivos em dia.',
- 'Fernanda Moraes, 43 anos. HistÃ³rico familiar de cÃ¢ncer de mama. Acompanhamento semestral.',
- 'Sem prescriÃ§Ã£o necessÃ¡ria.',
- 'Mamografia bilateral. Papanicolau. Ultrassonografia pÃ©lvica.',
+ 'Fernanda Moraes, 43 anos. Histórico familiar de câncer de mama. Acompanhamento semestral.',
+ 'Sem prescrição necessária.',
+ 'Mamografia bilateral. Papanicolau. Ultrassonografia pélvica.',
  NOW());
 

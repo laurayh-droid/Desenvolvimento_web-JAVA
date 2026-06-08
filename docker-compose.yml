@@ -14,7 +14,7 @@ services:
     volumes:
       - mysql_appointment_data:/var/lib/mysql
     networks:
-      - order-system-network
+      - clinica-medica
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
@@ -39,7 +39,7 @@ services:
       DB_USER: root
       DB_PASSWORD: root
     networks:
-      - order-system-network
+      - clinica-medica
     depends_on:
       mysql-appointment:
         condition: service_healthy
@@ -57,7 +57,7 @@ services:
     volumes:
       - mysql_administrative_data:/var/lib/mysql
     networks:
-      - order-system-network
+      - clinica-medica
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
@@ -82,7 +82,7 @@ services:
       DB_USER: root
       DB_PASSWORD: root
     networks:
-      - order-system-network
+      - clinica-medica
     depends_on:
       mysql-administrative:
         condition: service_healthy
@@ -100,7 +100,7 @@ services:
     volumes:
       - mysql_attendance_data:/var/lib/mysql
     networks:
-      - order-system-network
+      - clinica-medica
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
@@ -125,14 +125,35 @@ services:
       DB_USER: root
       DB_PASSWORD: root
     networks:
-      - order-system-network
+      - clinica-medica
     depends_on:
       mysql-attendance:
         condition: service_healthy
     restart: on-failure
 
+  gateway-service:
+    build:
+      context: gateway-service
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: target/gateway-service-1.0.0.jar
+    container_name: gateway-service
+    image: imepac/gateway-service:1.0.0
+    ports:
+      - "8080:8080"
+    networks:
+      - clinica-medica
+    depends_on:
+      appointment-service:
+        condition: service_started
+      administrative-service:
+        condition: service_started
+      attendance-service:
+        condition: service_started
+    restart: on-failure
+
 networks:
-  order-system-network:
+  clinica-medica:
     driver: bridge
 
 volumes:

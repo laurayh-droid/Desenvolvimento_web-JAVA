@@ -25,8 +25,7 @@ O projeto usa:
 - `commons/`: biblioteca compartilhada entre os módulos
 - `administrative-service/`: serviço administrativo
 - `appointment-service/`: serviço de agendamento de consultas
-- `attendance-service/`: serviço de atendimento médico
-- `docker-compose.yml`: orquestração dos serviços e bancos de dados MySQL
+- `attendance-service/`: serviço de atendimento médico- `gateway-service`/: serviço de roteamento e API Gateway- `docker-compose.yml`: orquestração dos serviços e bancos de dados MySQL
 
 ## Requisitos
 
@@ -93,6 +92,7 @@ mvn spring-boot:run -pl appointment-service
 | `appointment-service` | `8083` | `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` |
 | `administrative-service` | `8084` | `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` |
 | `attendance-service` | `8085` | `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` |
+| `gateway-service` | `8080` | Nenhuma variável especial necessária |
 
 Os bancos criados pelo Compose são:
 
@@ -107,6 +107,14 @@ Os módulos de serviço usam Dockerfiles locais:
 - `appointment-service/Dockerfile`
 - `administrative-service/Dockerfile`
 - `attendance-service/Dockerfile`
+- `gateway-service/Dockerfile`
+
+## Kubernetes
+
+O projeto agora inclui manifests Kubernetes em `k8s/` para os serviços e os bancos de dados MySQL.
+
+- `k8s/README.md` explica como construir as imagens e aplicar os recursos.
+- `gateway-service` continua como ponto de entrada central no cluster.
 
 Cada Dockerfile copia o JAR gerado e inicia a aplicação com `java -jar app.jar`.
 

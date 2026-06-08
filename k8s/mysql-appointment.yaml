@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-appointment
+  labels:
+    app: mysql-appointment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-appointment
+  template:
+    metadata:
+      labels:
+        app: mysql-appointment
+    spec:
+      containers:
+        - name: mysql-appointment
+          image: mysql:8.0
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: MYSQL_DATABASE
+              value: appointment_db
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-appointment-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-appointment
+spec:
+  selector:
+    app: mysql-appointment
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-appointment-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
