@@ -13,6 +13,7 @@ services:
       - "3309:3306"
     volumes:
       - mysql_appointment_data:/var/lib/mysql
+      - ./banco_appointment.sql:/docker-entrypoint-initdb.d/banco_appointment.sql:ro
     networks:
       - clinica-medica
     healthcheck:
@@ -21,6 +22,7 @@ services:
       timeout: 5s
       retries: 10
       start_period: 60s
+
 
   appointment-service:
     build:
@@ -56,6 +58,7 @@ services:
       - "3310:3306"
     volumes:
       - mysql_administrative_data:/var/lib/mysql
+      - ./banco_administrative.sql:/docker-entrypoint-initdb.d/banco_administrative.sql:ro
     networks:
       - clinica-medica
     healthcheck:
@@ -64,6 +67,7 @@ services:
       timeout: 5s
       retries: 10
       start_period: 60s
+
 
   administrative-service:
     build:
@@ -99,6 +103,7 @@ services:
       - "3311:3306"
     volumes:
       - mysql_attendance_data:/var/lib/mysql
+      - ./banco_attendance.sql:/docker-entrypoint-initdb.d/banco_attendance.sql:ro
     networks:
       - clinica-medica
     healthcheck:
@@ -107,6 +112,7 @@ services:
       timeout: 5s
       retries: 10
       start_period: 60s
+
 
   attendance-service:
     build:
