@@ -12,6 +12,12 @@ Este documento lista os principais comandos utilizados no terminal e no banco de
 - **Para que serve:** Para e remove todos os containers, redes e **volumes** criados pelo `docker-compose up`.
 - **Quando usar:** Útil para "resetar" o ambiente do zero. A flag `-v` (volumes) é muito importante, pois ela apaga os discos virtuais de dados do banco. Se o seu banco de dados estiver com erro de permissão ou "bugado", usar esse comando fará com que o MySQL seja recriado do zero na próxima vez que você subir os containers.
 
+### `docker-compose up --build`
+- **Para que serve:** Sobe o ambiente inteiro definido no `docker-compose.yml` **e reconstrói** as imagens dos serviços que possuem `build` (ex: os microsserviços Java).
+- **O que acontece com o banco:** ao subir, os containers MySQL executam automaticamente os scripts SQL montados em `/docker-entrypoint-initdb.d/` (isso cria o schema/tabelas). Esse comportamento ocorre na **primeira inicialização do volume vazio**.
+- **Quando usar:** quando você quer atualizar o código/arquitetura dos serviços e também garantir que o banco foi inicializado (por isso, em geral é usado junto com `docker-compose down -v` para forçar reexecução dos scripts).
+
+
 ### `docker ps`
 - **Para que serve:** Lista os containers que estão rodando no momento. 
 - **Comando extra usado:** `docker ps --filter "name=mysql-" --format "table {{.Names}}\t{{.Status}}"`
