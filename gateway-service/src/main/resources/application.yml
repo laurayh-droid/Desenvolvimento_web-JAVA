@@ -4,17 +4,20 @@ server:
 spring:
   cloud:
     gateway:
-      routes:
-        - id: appointment-service
-          uri: http://appointment-service:8083
-          predicates:
-            - Path=/api/v1/pacientes/**
-            - Path=/api/v1/consultas/**
-        - id: administrative-service
-          uri: http://administrative-service:8084
-          predicates:
-            - Path=/api/v1/admin/**
-        - id: attendance-service
-          uri: http://attendance-service:8085
-          predicates:
-            - Path=/api/v1/atendimentos/**
+      server:
+        webflux:
+          routes:
+            - id: appointment-service
+              uri: http://appointment-service:8083
+              predicates:
+                - Path=/api/v1/pacientes/**
+                - Path=/api/v1/consultas/**
+            - id: administrative-service
+              uri: http://administrative-service:8084
+              predicates:
+                - Path=/api/v1/admin/**
+            - id: attendance-service
+              uri: http://attendance-service:8085
+              predicates:
+                - Path=/api/v1/atendimentos/**
+

@@ -1,5 +1,3 @@
-
-
 services:
 
   mysql-appointment:
@@ -130,12 +128,14 @@ services:
       DB_NAME: attendance_db
       DB_USER: root
       DB_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
     networks:
       - clinica-medica
     depends_on:
       mysql-attendance:
         condition: service_healthy
     restart: on-failure
+
 
   gateway-service:
     build:
@@ -166,6 +166,3 @@ volumes:
   mysql_appointment_data:
   mysql_administrative_data:
   mysql_attendance_data:
-
-
-

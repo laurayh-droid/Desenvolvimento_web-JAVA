@@ -4,6 +4,18 @@ Este documento lista os principais comandos utilizados no terminal e no banco de
 
 ## Comandos Docker
 
+Como subir a aplicação no Docker (Windows) + correções para funcionar localmente.
+
+Comandos:
+
+Build (gerar JARs):
+cd c:/Users/evand/Documents/Desenvolvimento_web-JAVA
+mvnd -q -DskipTests package
+Subir tudo com Docker Compose:
+docker-compose up --build -d
+Verificar:
+docker-compose ps
+
 ### `docker-compose up -d`
 - **Para que serve:** Inicia todos os serviços (bancos de dados e aplicações Java) definidos no arquivo `docker-compose.yml`. A flag `-d` (detached) faz com que os containers rodem em segundo plano, liberando o seu terminal para continuar sendo usado.
 - **Quando usar:** Sempre que quiser ligar o seu projeto.
