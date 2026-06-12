@@ -4,9 +4,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+import com.fasterxml.jackson.databind.annotation.Jacksonized;
 
 @Getter
 @Builder
+@Jacksonized
 public class CriarAtendimentoRequest {
 
     @NotNull

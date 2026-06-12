@@ -7,11 +7,13 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
+import com.fasterxml.jackson.databind.annotation.Jacksonized;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Builder
+@Jacksonized
 public class CriarPacienteRequest {
 
     @NotBlank

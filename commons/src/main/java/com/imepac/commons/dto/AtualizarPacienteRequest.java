@@ -4,11 +4,13 @@ import com.imepac.commons.enums.Gender;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
+import com.fasterxml.jackson.databind.annotation.Jacksonized;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Builder
+@Jacksonized
 public class AtualizarPacienteRequest {
 
     @Size(max = 200)
