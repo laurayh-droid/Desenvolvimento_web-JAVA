@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
-import com.fasterxml.jackson.databind.annotation.Jacksonized;
+import lombok.extern.jackson.Jacksonized;
 
 import java.time.LocalDateTime;
 

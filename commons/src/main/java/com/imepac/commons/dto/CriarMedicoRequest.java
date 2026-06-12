@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
-import com.fasterxml.jackson.databind.annotation.Jacksonized;
+import lombok.extern.jackson.Jacksonized;
 
 @Getter
 @Builder
