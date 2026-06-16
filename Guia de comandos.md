@@ -54,3 +54,11 @@ docker-compose ps
 
 ---
 *Dica para o MySQL Workbench: lembre-se sempre de clicar com o botão direito e escolher **"Refresh All"** no menu lateral esquerdo para ver as tabelas recém-criadas.*
+
+ver os logs:
+docker compose ps
+docker compose logs -f
+docker compose logs -f appointment-service
+docker compose logs -f administrative-service
+docker compose logs -f attendance-service
+
