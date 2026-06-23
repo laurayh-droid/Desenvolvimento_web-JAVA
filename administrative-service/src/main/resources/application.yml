@@ -39,5 +39,14 @@ logbook:
 logging:
   level:
     com.imepac: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  health:
+    probes:
+      enabled: true
     org.zalando.logbook: TRACE
 
