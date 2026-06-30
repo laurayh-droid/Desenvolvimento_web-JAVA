@@ -2,7 +2,9 @@ package com.imepac.administrative.service.impl;
 
 import com.imepac.administrative.converter.AdministracaoConversor;
 import com.imepac.administrative.repository.FuncionarioRepository;
+import com.imepac.administrative.repository.PerfilRepository;
 import com.imepac.administrative.repository.UsuarioRepository;
+
 import com.imepac.administrative.service.UsuarioService;
 import com.imepac.commons.dto.AtualizarUsuarioRequest;
 import com.imepac.commons.dto.CriarUsuarioRequest;
@@ -23,6 +25,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final FuncionarioRepository funcionarioRepository;
+    private final PerfilRepository perfilRepository;
+
 
     @Override
     public RespostaUsuario cadastrarUsuario(CriarUsuarioRequest request) {
@@ -31,6 +35,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         funcionarioRepository.findById(request.getFuncionarioId())
                 .orElseThrow(() -> new EntityNotFoundException("Funcionario", request.getFuncionarioId()));
+
+        perfilRepository.findById(request.getPerfilId())
+                .orElseThrow(() -> new EntityNotFoundException("Perfil", request.getPerfilId()));
 
         Usuario usuario = AdministracaoConversor.toEntity(request);
         return AdministracaoConversor.toResponse(usuarioRepository.save(usuario));

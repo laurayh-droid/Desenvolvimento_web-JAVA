@@ -38,7 +38,7 @@ class PacienteServiceImplTest {
                 .rg("12345")
                 .cpf("11122233344")
                 .dataNascimento(LocalDateTime.now().minusYears(30))
-                .genero(Gender.M)
+                .genero(Gender.MALE)
                 .telefoneFixo("1111")
                 .telefoneCelular("99999")
                 .possuiSeguro(false)
@@ -71,7 +71,7 @@ class PacienteServiceImplTest {
                 .rg("rg")
                 .cpf("cpf")
                 .dataNascimento(LocalDateTime.now().minusYears(20))
-                .genero(Gender.M)
+                .genero(Gender.MALE)
                 .telefoneFixo("t")
                 .telefoneCelular("t")
                 .possuiSeguro(false)
@@ -97,7 +97,7 @@ class PacienteServiceImplTest {
                 .rg("rg")
                 .cpf("cpf")
                 .dataNascimento(LocalDateTime.now().minusYears(20))
-                .genero(Gender.M)
+                .genero(Gender.MALE)
                 .telefoneFixo("t")
                 .telefoneCelular("t")
                 .possuiSeguro(true)
@@ -143,3 +143,4 @@ class PacienteServiceImplTest {
         verify(pacienteRepository).save(any(Paciente.class));
     }
 }
+

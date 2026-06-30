@@ -36,13 +36,13 @@ public class Atendimento {
     @Column(name = "observacoes", length = 2000)
     private String observacoes;
 
-    @Column(name = "prontuario", length = 10000)
+    @Column(name = "prontuario", columnDefinition = "TEXT")
     private String prontuario;
 
-    @Column(name = "receituario", length = 10000)
+    @Column(name = "receituario", columnDefinition = "TEXT")
     private String receituario;
 
-    @Column(name = "exames_solicitados", length = 10000)
+    @Column(name = "exames_solicitados", columnDefinition = "TEXT")
     private String examesSolicitados;
 
     @Column(name = "criado_em", nullable = false, updatable = false)

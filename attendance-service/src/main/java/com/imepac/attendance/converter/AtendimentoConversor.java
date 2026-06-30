@@ -11,10 +11,15 @@ public final class AtendimentoConversor {
     }
 
     public static Atendimento toEntity(CriarAtendimentoRequest request) {
+        // Garantia extra para evitar violação NOT NULL caso o @PrePersist não seja acionado
+        // (ou em caso de mudanças futuras no fluxo de persistência).
+        var agora = java.time.LocalDateTime.now();
+
         return Atendimento.builder()
                 .agendamentoId(request.getAgendamentoId())
                 .pacienteId(request.getPacienteId())
                 .medicoId(request.getMedicoId())
+                .registradoEm(agora)
                 .diagnostico(request.getDiagnostico())
                 .observacoes(request.getObservacoes())
                 .prontuario(request.getProntuario())
@@ -22,6 +27,7 @@ public final class AtendimentoConversor {
                 .examesSolicitados(request.getExamesSolicitados())
                 .build();
     }
+
 
     public static RespostaAtendimento toResponse(Atendimento atendimento) {
         return RespostaAtendimento.builder()

@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
+
+
 @Slf4j
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -65,10 +70,22 @@ public class GlobalExceptionHandler {
         return ApiResponse.error(message);
     }
 
+    @ExceptionHandler({DataIntegrityViolationException.class, ConstraintViolationException.class})
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public ApiResponse<Void> handleDataIntegrity(Exception ex) {
+        log.warn("Data integrity/constraint violation: {}", ex.getMessage());
+        return ApiResponse.error(
+                "Dados inválidos para o relacionamento",
+                ex.getCause() != null ? List.of(ex.getCause().getMessage()) : null
+        );
+    }
+
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiResponse<Void> handleGeneral(Exception ex) {
         log.error("Unexpected error: {}", ex.getMessage(), ex);
         return ApiResponse.error("An unexpected error occurred");
     }
+
 }

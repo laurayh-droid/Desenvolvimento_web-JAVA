@@ -4,6 +4,8 @@ import com.imepac.administrative.repository.EspecialidadeRepository;
 import com.imepac.administrative.repository.MedicoRepository;
 import com.imepac.administrative.service.impl.MedicoServiceImpl;
 import com.imepac.commons.dto.CriarMedicoRequest;
+import com.imepac.commons.entity.Especialidade;
+
 import com.imepac.commons.entity.Medico;
 import com.imepac.commons.exception.BusinessException;
 import com.imepac.commons.exception.EntityNotFoundException;
@@ -15,8 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -52,7 +54,7 @@ class MedicoServiceImplTest {
     void cadastrarMedico_success_saves() {
         CriarMedicoRequest req = CriarMedicoRequest.builder().nome("M").crm("123").especialidadeId(1L).build();
         when(medicoRepository.existsByCrm(req.getCrm())).thenReturn(false);
-        when(especialidadeRepository.findById(1L)).thenReturn(Optional.of(mock(com.imepac.administrative.entity.Especialidade.class)));
+        when(especialidadeRepository.findById(1L)).thenReturn(Optional.of(mock(Especialidade.class)));
 
         when(medicoRepository.save(any(Medico.class))).thenAnswer(inv -> {
             Medico m = inv.getArgument(0);
@@ -62,7 +64,7 @@ class MedicoServiceImplTest {
 
         var resp = medicoService.cadastrarMedico(req);
         assertThat(resp).isNotNull();
-        // id set by save stub
         assertThat(resp.getId()).isEqualTo(5L);
     }
 }
+

@@ -8,6 +8,8 @@ Como subir a aplicação no Docker (Windows) + correções para funcionar localm
 
 Comandos:
 
+mvnd clean compile
+
 Build (gerar JARs):
 cd c:/Users/evand/Documents/Desenvolvimento_web-JAVA
 mvnd -q -DskipTests package
@@ -17,21 +19,24 @@ Verificar:
 docker-compose ps
 
 ### `docker-compose up -d`
+
 - **Para que serve:** Inicia todos os serviços (bancos de dados e aplicações Java) definidos no arquivo `docker-compose.yml`. A flag `-d` (detached) faz com que os containers rodem em segundo plano, liberando o seu terminal para continuar sendo usado.
 - **Quando usar:** Sempre que quiser ligar o seu projeto.
 
 ### `docker-compose down -v`
+
 - **Para que serve:** Para e remove todos os containers, redes e **volumes** criados pelo `docker-compose up`.
 - **Quando usar:** Útil para "resetar" o ambiente do zero. A flag `-v` (volumes) é muito importante, pois ela apaga os discos virtuais de dados do banco. Se o seu banco de dados estiver com erro de permissão ou "bugado", usar esse comando fará com que o MySQL seja recriado do zero na próxima vez que você subir os containers.
 
 ### `docker-compose up --build`
+
 - **Para que serve:** Sobe o ambiente inteiro definido no `docker-compose.yml` **e reconstrói** as imagens dos serviços que possuem `build` (ex: os microsserviços Java).
 - **O que acontece com o banco:** ao subir, os containers MySQL executam automaticamente os scripts SQL montados em `/docker-entrypoint-initdb.d/` (isso cria o schema/tabelas). Esse comportamento ocorre na **primeira inicialização do volume vazio**.
 - **Quando usar:** quando você quer atualizar o código/arquitetura dos serviços e também garantir que o banco foi inicializado (por isso, em geral é usado junto com `docker-compose down -v` para forçar reexecução dos scripts).
 
-
 ### `docker ps`
-- **Para que serve:** Lista os containers que estão rodando no momento. 
+
+- **Para que serve:** Lista os containers que estão rodando no momento.
 - **Comando extra usado:** `docker ps --filter "name=mysql-" --format "table {{.Names}}\t{{.Status}}"`
 - **Explicação:** Esse comando específico que usamos filtrou apenas os containers que tinham a palavra "mysql" no nome e mostrou uma tabela limpa apenas com os nomes e o status deles. Foi ótimo para verificar se eles já estavam como `healthy` (saudáveis e prontos para conexão).
 
@@ -40,10 +45,12 @@ docker-compose ps
 ## Comandos MySQL / SQL
 
 ### Execução de Scripts `.sql`
+
 - **Para que serve:** Os arquivos `banco_appointment.sql`, `banco_administrative.sql` e `banco_attendance.sql` são scripts que contêm instruções do tipo `CREATE TABLE` (criar tabelas) e `INSERT INTO` (inserir dados).
 - **Como usamos:** Abrimos cada arquivo na sua respectiva conexão/porta no MySQL Workbench e clicamos no ícone do raio ⚡. Isso foi necessário porque os bancos MySQL iniciam em branco.
 
 ### `SELECT * FROM nome_da_tabela;`
+
 - **Para que serve:** Busca e exibe todas (`*`) as colunas e todos os registros de uma tabela específica.
 - **Quando usar:** Para verificar se os dados foram inseridos corretamente ou para ver as informações que o seu sistema Java acabou de salvar no banco.
 - **Exemplos que usamos:**
@@ -53,6 +60,7 @@ docker-compose ps
   - `SELECT * FROM medicos;` *(Executado na porta 3310, banco administrative_db)*
 
 ---
+
 *Dica para o MySQL Workbench: lembre-se sempre de clicar com o botão direito e escolher **"Refresh All"** no menu lateral esquerdo para ver as tabelas recém-criadas.*
 
 ver os logs:
@@ -61,4 +69,3 @@ docker compose logs -f
 docker compose logs -f appointment-service
 docker compose logs -f administrative-service
 docker compose logs -f attendance-service
-

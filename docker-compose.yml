@@ -101,7 +101,8 @@ services:
       - "3311:3306"
     volumes:
       - mysql_attendance_data:/var/lib/mysql
-      - ./banco_attendance.sql:/docker-entrypoint-initdb.d/banco_attendance.sql:ro
+      - ./banco_attendance.sql/init.sql:/docker-entrypoint-initdb.d/banco_attendance.sql:ro
+
     networks:
       - clinica-medica
     healthcheck:

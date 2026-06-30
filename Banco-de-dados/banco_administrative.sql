@@ -27,6 +27,14 @@ CREATE TABLE IF NOT EXISTS convenios (
     atualizado_em DATETIME     NULL
 );
 
+CREATE TABLE IF NOT EXISTS perfis (
+    id            BIGINT       AUTO_INCREMENT PRIMARY KEY,
+    nome          VARCHAR(100) NOT NULL UNIQUE,
+    descricao     VARCHAR(255) NULL,
+    criado_em     DATETIME     NOT NULL,
+    atualizado_em DATETIME     NULL
+);
+
 CREATE TABLE IF NOT EXISTS funcionarios (
     id               BIGINT       AUTO_INCREMENT PRIMARY KEY,
     nome_completo    VARCHAR(200) NOT NULL,
@@ -64,6 +72,10 @@ CREATE TABLE IF NOT EXISTS usuario_permissoes (
     CONSTRAINT fk_permissoes_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
+INSERT INTO perfis (nome, descricao) VALUES
+('ROLE_ADMIN', 'Administrador do sistema'),
+('ROLE_USER',  'Usuário padrão');
+
 INSERT INTO especialidades (descricao, criado_em) VALUES
 ('Cardiologia',          NOW()),
 ('Pediatria',            NOW()),
@@ -93,7 +105,7 @@ INSERT INTO funcionarios (nome_completo, rg, cpf, data_nascimento, telefone_fixo
 ('Fernanda Costa Oliveira', 'MG-9876543', '404.555.666-77', '1992-03-15 00:00:00', '(34) 3241-1111', '(34) 99821-4444', 'Rua das Flores',     '120', 'Centro',        'Araguari',   'MG', '38440-010', '00123456789', '12345678901', NOW()),
 ('Ricardo Alves Pereira',   'MG-8765432', '505.666.777-88', '1988-07-20 00:00:00', '(34) 3241-2222', '(34) 99821-5555', 'Av. Brasil',         '450', 'Jardim America', 'Araguari',   'MG', '38440-020', '00234567890', '23456789012', NOW()),
 ('Camila Santos Reis',      'MG-7654321', '606.777.888-99', '1995-11-08 00:00:00', NULL,             '(34) 99821-6666', 'Rua Minas Gerais',   '88',  'Nova Araguari',  'Araguari',   'MG', '38440-030', '00345678901', '34567890123', NOW()),
-('Diego Martins Souza',     'MG-6543210', '707.888.999-00', '1990-05-25 00:00:00', '(34) 3241-4444', '(34) 99821-7777', 'Rua GoiÃ¡s',          '200', 'SÃ£o Francisco',  'UberlÃ¢ndia', 'MG', '38400-100', '00456789012', '45678901234', NOW());
+('Diego Martins Souza',     'MG-6543210', '707.888.999-00', '1990-05-25 00:00:00', '(34) 3241-4444', '(34) 99821-7777', 'Rua Goiás',          '200', 'São Francisco',  'Uberlândia', 'MG', '38400-100', '00456789012', '45678901234', NOW());
 
 INSERT INTO usuarios (id_user, senha, funcionario_id, criado_em) VALUES
 ('fernanda.costa',  'c3a1b2d4e5f6789012345678901234567890abcd', 1, NOW()),
@@ -108,6 +120,3 @@ INSERT INTO usuario_permissoes (usuario_id, permissao) VALUES
 (3, 'ROLE_USER'),
 (4, 'ROLE_ADMIN'),
 (4, 'ROLE_USER');
-
-
-
