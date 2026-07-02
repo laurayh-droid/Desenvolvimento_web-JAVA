@@ -8,12 +8,12 @@ Como subir a aplicação no Docker (Windows) + correções para funcionar localm
 
 Comandos:
 
-mvnd clean compile
+mvnd clean compile: Limpa e compila o projeto
 
 Build (gerar JARs):
 cd c:/Users/evand/Documents/Desenvolvimento_web-JAVA
-mvnd -q -DskipTests package
-Subir tudo com Docker Compose:
+mvnd -q -DskipTests package : Empacota o projeto sem rodar testes, de forma silenciosa
+Subir tudo com Docker Compose
 docker-compose up --build -d
 Verificar:
 docker-compose ps
