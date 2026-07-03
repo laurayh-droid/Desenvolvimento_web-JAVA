@@ -147,4 +147,4 @@ Cada módulo possui documentação específica:
 
 - O projeto usa Maven multi-módulo, então o comando de build deve ser executado na raiz do repositório.
 - O `docker-compose.yml` depende dos JARs gerados em `target/` para os serviços Java.
-- Se alterar a versão dos serviços ou nomes de JAR, atualize também os `ARG JAR_FILE` nos Dockerfiles correspondentes.
+- Se alterar a versão dos serviços ou nomes de JAR, atualize também os `ARG JAR_FILE` nos Dockerfiles correspondentes..
